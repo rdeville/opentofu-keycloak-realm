@@ -73,11 +73,11 @@ module "realm" {
 * [opentofu](https://opentofu.org/docs/):
   `>= 1.8, < 2.0`
 * [keycloak](https://search.opentofu.org/provider/keycloak/keycloak/):
-  `5.6.0`
+  `~>5.6`
 
 ### Resources
 
-* [resource.keycloak_realm.this](https://registry.terraform.io/providers/keycloak/keycloak/5.6.0/docs/resources/realm)
+* [resource.keycloak_realm.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm)
   > Full Realm configuration
 
 <!-- markdownlint-capture -->

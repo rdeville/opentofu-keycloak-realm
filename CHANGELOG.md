@@ -1,6 +1,18 @@
 <!-- markdownlint-disable-file -->
 # CHANGELOG
 
+## v0.1.1 (2026-02-04)
+
+### 🩹 Patch
+
+  * ⬆️ Bump constraint version for provider to &#39;~&gt;5.6&#39; (!3) by Romain Deville ([`e5814ca`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/e5814caff31d04d8503cd3e7a9d711ac650a56fb))
+  * ⬆️ Bump provider constraint to ~&gt;5.6 by Romain Deville ([`62ba8d2`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/62ba8d2603f58fdc1eebe57066c3228f2d6a28ea)) 🔏
+  * ⬆️(devbox): Update devbox.lock by Romain Deville ([`5bb1071`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/5bb107111c8f0dba5c8dbd19657618a7c744733a)) 🔏
+
+### 🔊 Others
+
+  * 📝 Update README with tf-docs by Romain Deville ([`2bb3d15`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/2bb3d1582acc26f679b234bce080874ae6158595)) 🔏
+
 ## v0.1.0 (2026-02-04)
 
 ### ✨ Minor

@@ -1,6 +1,18 @@
 <!-- markdownlint-disable-file -->
 # CHANGELOG
 
+## v0.1.2 (2026-02-05)
+
+### 🩹 Patch
+
+  * ⚡️ Remove useless variable and change output name (!4) by Romain Deville ([`a11b3d6`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/a11b3d68a9c5923f35e3723231b200f9c68fe86b))
+  * ⚡️ Remove useless variable in security_defenses.headers by Romain Deville ([`b01b378`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/b01b3786f9889cc51c9ae005989c86c6507de30a)) 🔏
+  * ⚡️ Change the output from realm to this to reflect resource behaviour by Romain Deville ([`f50e6fd`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/f50e6fdcdb387fd1cfab7137f2937b15d54a8366)) 🔏
+
+### 🔊 Others
+
+  * 📝 Update README with tf-docs by Romain Deville ([`44b9118`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/44b91180baf9e9e6bd9417d108d867ca3c1269a3)) 🔏
+
 ## v0.1.1 (2026-02-04)
 
 ### 🩹 Patch

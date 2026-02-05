@@ -576,14 +576,13 @@ variable "security_defenses" {
       wait_increment_seconds           = 60
     }
     headers = {
-      content_security_policy             = "frame-src 'self'; frame-ancestors 'self'; object-src 'none';"
-      content_security_policy_report_only = ""
-      referrer_policy                     = "no-referrer"
-      strict_transport_security           = "max-age=31536000; includeSubDomains"
-      x_content_type_options              = "nosniff"
-      x_frame_options                     = "SAMEORIGIN"
-      x_robots_tag                        = "none"
-      x_xss_protection                    = "1; mode=block"
+      content_security_policy   = "frame-src 'self'; frame-ancestors 'self'; object-src 'none';"
+      referrer_policy           = "no-referrer"
+      strict_transport_security = "max-age=31536000; includeSubDomains"
+      x_content_type_options    = "nosniff"
+      x_frame_options           = "SAMEORIGIN"
+      x_robots_tag              = "none"
+      x_xss_protection          = "1; mode=block"
     }
   }
 

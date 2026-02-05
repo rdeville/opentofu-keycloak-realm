@@ -1406,7 +1406,7 @@ support following attributes:
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  map[brute_force_detection:map[failure_reset_time_seconds:43200 max_failure_wait_seconds:900 max_login_failures:30 max_temporary_lockouts:0 minimum_quick_login_wait_seconds:60 permanent_lockout:false quick_login_check_milli_seconds:1000 wait_increment_seconds:60] headers:map[content_security_policy:frame-src 'self'; frame-ancestors 'self'; object-src 'none'; content_security_policy_report_only: referrer_policy:no-referrer strict_transport_security:max-age=31536000; includeSubDomains x_content_type_options:nosniff x_frame_options:SAMEORIGIN x_robots_tag:none x_xss_protection:1; mode=block]]
+  map[brute_force_detection:map[failure_reset_time_seconds:43200 max_failure_wait_seconds:900 max_login_failures:30 max_temporary_lockouts:0 minimum_quick_login_wait_seconds:60 permanent_lockout:false quick_login_check_milli_seconds:1000 wait_increment_seconds:60] headers:map[content_security_policy:frame-src 'self'; frame-ancestors 'self'; object-src 'none'; referrer_policy:no-referrer strict_transport_security:max-age=31536000; includeSubDomains x_content_type_options:nosniff x_frame_options:SAMEORIGIN x_robots_tag:none x_xss_protection:1; mode=block]]
   ```
 
   </div>
@@ -1616,7 +1616,7 @@ following attributes:
 
 ### Outputs
 
-* `realm`:
+* `this`:
   ID of the deployed realm
 
 </details>

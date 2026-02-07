@@ -141,3 +141,36 @@ resource "keycloak_realm" "this" {
 
   terraform_deletion_protection = var.terraform_deletion_protection
 }
+
+# Setup scopes for clients
+resource "keycloak_openid_client_scope" "this" {
+  for_each = var.client_scopes
+  realm_id = keycloak_realm.this.id
+
+  name                   = each.key
+  description            = each.value.description
+  include_in_token_scope = each.value.include_in_token_scope
+  consent_screen_text    = each.value.consent_screen_text
+  gui_order              = each.value.gui_order
+}
+
+# Setup default client scopes for the realm
+resource "keycloak_realm_default_client_scopes" "this" {
+  realm_id = keycloak_realm.this.id
+
+  default_scopes = local.default_scopes
+}
+
+# Setup optional client scopes for the realm
+resource "keycloak_realm_optional_client_scopes" "this" {
+  realm_id = keycloak_realm.this.id
+
+  optional_scopes = local.optional_scopes
+}
+
+# Setup default roles for the realm
+resource "keycloak_default_roles" "this" {
+  realm_id = keycloak_realm.this.id
+
+  default_roles = var.default_roles
+}

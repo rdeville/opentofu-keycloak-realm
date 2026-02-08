@@ -1,6 +1,18 @@
 <!-- markdownlint-disable-file -->
 # CHANGELOG
 
+## v0.1.3 (2026-02-08)
+
+### 🩹 Patch
+
+  * 🔧 Update default variable values (!5) by Romain Deville ([`ebdb0b9`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/ebdb0b99ad2812a69c18e0b166071334bbaf1859))
+  * 🔧 Update default variable values by Romain Deville ([`9e885f2`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/9e885f245c2eddccf4c4497b1db9a2dbbd4cbb02)) 🔏
+  * 🔧(pre-commit): Remove tf-docs from pre-commit by Romain Deville ([`9a3570f`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/9a3570fe1f3bbb07c9a353242100352786d24ea3)) 🔏
+
+### 🔊 Others
+
+  * 📝 Update README with tf-docs by Romain Deville ([`f1b8679`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/f1b867985a2a2e442f2882acaee68c9a55d40482)) 🔏
+
 ## v0.1.2 (2026-02-05)
 
 ### 🩹 Patch

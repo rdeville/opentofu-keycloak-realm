@@ -49,7 +49,7 @@ variable "organizations_enabled" {
   When true, organization support is enabled. Defaults to false.
   EOM
 
-  default = true
+  default = false
 }
 
 variable "attributes" {
@@ -166,7 +166,7 @@ variable "ssl_required" {
   Can be one of following values: 'none, 'external' or 'all'
   EOM
 
-  default = "all"
+  default = "external"
 }
 
 # Themes
@@ -220,7 +220,7 @@ variable "default_signature_algorithm" {
   Default algorithm used to sign tokens for the realm.
   EOM
 
-  default = ""
+  default = "RS256"
 }
 
 variable "revoke_refresh_token" {
@@ -295,7 +295,7 @@ variable "offline_session_max_lifespan_enabled" {
   Enable `offline_session_max_lifespan`.
   EOM
 
-  default = true
+  default = false
 }
 
 variable "offline_session_idle_timeout" {
@@ -345,7 +345,7 @@ variable "access_token_lifespan" {
   The amount of time an access token can be used before it expires.
   EOM
 
-  default = "5m"
+  default = "1m"
 }
 
 variable "access_token_lifespan_for_implicit_flow" {
@@ -424,7 +424,7 @@ variable "oauth2_device_polling_interval" {
   polling requests to the token endpoint.
   EOM
 
-  default = 6
+  default = 5
 }
 
 variable "smtp_server" {
@@ -596,7 +596,9 @@ variable "password_policy" {
   The password policy for users within the realm.
   EOM
 
-  default = null
+  default = <<-EOM
+  digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and length(14) and notUsername and notEmail and notContainsUsername()
+  EOM
 }
 
 variable "otp_policy" {
@@ -634,8 +636,6 @@ variable "otp_policy" {
   }
 }
 
-# WebAuthn
-# The following settings can be used to modify the "WebAuthn Policy" and "WebAuthn Passwordless Policy" settings found within the "Authentication" section of the realm configuration UI. These top level attributes can be used:
 variable "web_authn_policy" {
   type = object({
     relying_party_entity_name         = optional(string)
@@ -651,6 +651,9 @@ variable "web_authn_policy" {
     extra_origins                     = optional(set(string))
   })
   description = <<-EOM
+  The following settings can be used to modify the "WebAuthn Policy" and
+  "WebAuthn Passwordless Policy" settings found within the "Authentication"
+  section of the realm configuration UI. These top level attributes can be used:
   Configuration for WebAuthn Passwordless Policy authentication. Support
   following attributes:
   * `relying_party_entity_name`: String, optional, A human-readable server name

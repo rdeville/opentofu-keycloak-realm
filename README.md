@@ -279,7 +279,7 @@ When true, organization support is enabled. Defaults to false.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  true
+  false
   ```
 
   </div>
@@ -584,7 +584,7 @@ Can be one of following values: 'none, 'external' or 'all'
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  all
+  external
   ```
 
   </div>
@@ -709,7 +709,7 @@ Default algorithm used to sign tokens for the realm.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  ""
+  RS256
   ```
 
   </div>
@@ -892,7 +892,7 @@ Me". If not set, Keycloak will default to the value of
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  true
+  false
   ```
 
   </div>
@@ -1020,7 +1020,7 @@ The amount of time an access token can be used before it expires.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  5m
+  1m
   ```
 
   </div>
@@ -1226,7 +1226,7 @@ polling requests to the token endpoint.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  6
+  5
   ```
 
   </div>
@@ -1431,7 +1431,8 @@ The password policy for users within the realm.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  null
+  digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and length(14) and notUsername and notEmail and notContainsUsername()
+
   ```
 
   </div>
@@ -1483,6 +1484,9 @@ Policy" tab within the realm settings. Support following attributes:
 
 ##### `web_authn_policy`
 
+The following settings can be used to modify the "WebAuthn Policy" and
+"WebAuthn Passwordless Policy" settings found within the "Authentication"
+section of the realm configuration UI. These top level attributes can be used:
 Configuration for WebAuthn Passwordless Policy authentication. Support
 following attributes:
 * `relying_party_entity_name`: String, optional, A human-readable server name

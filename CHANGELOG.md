@@ -1,6 +1,17 @@
 <!-- markdownlint-disable-file -->
 # CHANGELOG
 
+## v0.2.0 (2026-02-17)
+
+### ✨ Minor
+
+  * ✨ Add support for client scopes (default and optionals) and default realm roles (!6) by Romain Deville ([`844f2ba`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/844f2bab83d3b21eea3d21061e85a165f4d714f2))
+  * ✨ Add support of realm scopes, client scopes and realm default roles by Romain Deville ([`0941508`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/094150837587954757b96cf00bcb1a7d7a293614)) 🔏
+
+### 🔊 Others
+
+  * 📝 Update README with tf-docs and new examples by Romain Deville ([`9bf78b8`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/9bf78b88f34f2595bb4987d72ec6315b6ec8085e)) 🔏
+
 ## v0.1.3 (2026-02-08)
 
 ### 🩹 Patch

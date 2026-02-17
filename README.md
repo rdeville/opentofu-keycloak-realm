@@ -54,6 +54,98 @@ module "realm" {
 }
 ```
 
+### Deploy client scopes
+
+```hcl
+module "realm_with_client_scopes" {
+  source = "git::https://framagit.org/rdeville-public/opentofu/keycloak-realm.git"
+
+  realm = "my-realm"
+
+  smtp_server = {
+    from = "contact@domain.tld"
+    host = "smtp.domain.tld"
+  }
+
+  client_scopes = {
+    "custom-profile" = {
+      description            = "Custom profile scope"
+      consent_screen_text    = "We will read your custom profile information"
+      include_in_token_scope = true
+      gui_order              = 1
+    },
+    "custom-email" = {
+      description            = "Custom email scope"
+      consent_screen_text    = "We will read your email address"
+      include_in_token_scope = true
+      gui_order              = 2
+    }
+  }
+}
+```
+
+### Deploy default client scopes
+
+```hcl
+module "realm_with_default_scopes" {
+  source = "git::https://framagit.org/rdeville-public/opentofu/keycloak-realm.git"
+
+  realm = "my-realm"
+
+  smtp_server = {
+    from = "contact@domain.tld"
+    host = "smtp.domain.tld"
+  }
+
+  default_scopes = [
+    "email",
+    "profile",
+    "roles",
+  ]
+}
+```
+
+### Deploy optional client scopes
+
+```hcl
+module "realm_with_optional_scopes" {
+  source = "git::https://framagit.org/rdeville-public/opentofu/keycloak-realm.git"
+
+  realm = "my-realm"
+
+  smtp_server = {
+    from = "contact@domain.tld"
+    host = "smtp.domain.tld"
+  }
+
+  optional_scopes = [
+    "address",
+    "phone",
+    "offline_access",
+  ]
+}
+```
+
+### Deploy realm default roles
+
+```hcl
+module "realm_with_default_roles" {
+  source = "git::https://framagit.org/rdeville-public/opentofu/keycloak-realm.git"
+
+  realm = "my-realm"
+
+  smtp_server = {
+    from = "contact@domain.tld"
+    host = "smtp.domain.tld"
+  }
+
+  default_roles = [
+    "offline_access",
+    "uma_authorization",
+  ]
+}
+```
+
 <!-- BEGIN TF-DOCS -->
 ## ⚙️ Module Content
 
@@ -77,8 +169,16 @@ module "realm" {
 
 ### Resources
 
+* [resource.keycloak_default_roles.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/default_roles)
+  > Setup default roles for the realm
+* [resource.keycloak_openid_client_scope.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/openid_client_scope)
+  > Setup scopes for clients
 * [resource.keycloak_realm.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm)
   > Full Realm configuration
+* [resource.keycloak_realm_default_client_scopes.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm_default_client_scopes)
+  > Setup default client scopes for the realm
+* [resource.keycloak_realm_optional_client_scopes.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm_optional_client_scopes)
+  > Setup optional client scopes for the realm
 
 <!-- markdownlint-capture -->
 ### Inputs
@@ -156,6 +256,10 @@ string
 * [otp_policy](#otp_policy)
 * [web_authn_policy](#web_authn_policy)
 * [web_authn_passwordless_policy](#web_authn_passwordless_policy)
+* [client_scopes](#client_scopes)
+* [default_scopes](#default_scopes)
+* [optional_scopes](#optional_scopes)
+* [default_roles](#default_roles)
 
 
 ##### `enabled`
@@ -406,7 +510,7 @@ When true, the user's email will be used as their username during registration.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  true
+  false
   ```
 
   </div>
@@ -1431,8 +1535,7 @@ The password policy for users within the realm.
   <p style="border-bottom: 1px solid #333333;">Default</p>
 
   ```hcl
-  digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and length(14) and notUsername and notEmail and notContainsUsername()
-
+  notUsername and notEmail and notContainsUsername and digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and length(14)
   ```
 
   </div>
@@ -1616,11 +1719,134 @@ following attributes:
 
   </div>
 </details>
+
+##### `client_scopes`
+
+Map of object, such that the key is the name of the scope displayed in the
+GUI. Object support following arguments:
+* `description`: Optional, string, the description of this client scope in the
+  GUI.
+* `consent_screen_text`: Optional, string, when set, a consent screen will be
+  displayed to users authenticating to clients with this scope attached. The
+  consent screen will display the string value of this attribute.
+* `include_in_token_scope`: Optional, bool, when true, the name of this client
+  scope will be added to the access token property 'scope' as well as to the
+  Token Introspection Endpoint response. When false, this scope will be
+  omitted from the token and from the Token Introspection Endpoint response.
+* `gui_order`: Optional, number, specify order of the client scope in GUI
+  (such as in Consent page) as integer.
+
+<details style="width: 100%;display: inline-block">
+  <summary>Type & Default</summary>
+  <div style="height: 1em"></div>
+  <div style="width:64%; float:left;">
+  <p style="border-bottom: 1px solid #333333;">Type</p>
+
+  ```hcl
+  map(object({
+    # Key is the name of the scope
+    description            = optional(string)
+    consent_screen_text    = optional(string)
+    include_in_token_scope = optional(bool)
+    gui_order              = optional(number)
+
+  }))
+  ```
+
+  </div>
+  <div style="width:34%;float:right;">
+  <p style="border-bottom: 1px solid #333333;">Default</p>
+
+  ```hcl
+  {}
+  ```
+
+  </div>
+</details>
+
+##### `default_scopes`
+
+An array of default client scope names that should be used when creating new
+Keycloak clients.
+
+<details style="width: 100%;display: inline-block">
+  <summary>Type & Default</summary>
+  <div style="height: 1em"></div>
+  <div style="width:64%; float:left;">
+  <p style="border-bottom: 1px solid #333333;">Type</p>
+
+  ```hcl
+  list(string)
+  ```
+
+  </div>
+  <div style="width:34%;float:right;">
+  <p style="border-bottom: 1px solid #333333;">Default</p>
+
+  ```hcl
+  []
+  ```
+
+  </div>
+</details>
+
+##### `optional_scopes`
+
+An array of optional client scope names that should be used when creating new
+Keycloak clients.
+
+<details style="width: 100%;display: inline-block">
+  <summary>Type & Default</summary>
+  <div style="height: 1em"></div>
+  <div style="width:64%; float:left;">
+  <p style="border-bottom: 1px solid #333333;">Type</p>
+
+  ```hcl
+  list(string)
+  ```
+
+  </div>
+  <div style="width:34%;float:right;">
+  <p style="border-bottom: 1px solid #333333;">Default</p>
+
+  ```hcl
+  []
+  ```
+
+  </div>
+</details>
+
+##### `default_roles`
+
+List of roles assigned to new users by default.
+
+<details style="width: 100%;display: inline-block">
+  <summary>Type & Default</summary>
+  <div style="height: 1em"></div>
+  <div style="width:64%; float:left;">
+  <p style="border-bottom: 1px solid #333333;">Type</p>
+
+  ```hcl
+  list(string)
+  ```
+
+  </div>
+  <div style="width:34%;float:right;">
+  <p style="border-bottom: 1px solid #333333;">Default</p>
+
+  ```hcl
+  []
+  ```
+
+  </div>
+</details>
 <!-- markdownlint-restore -->
 
 ### Outputs
 
 * `this`:
+  ID of the deployed realm
+* `client_scopes`:
   ID of the deployed realm
 
 </details>

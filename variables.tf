@@ -100,7 +100,7 @@ variable "registration_email_as_username" {
   When true, the user's email will be used as their username during registration.
   EOM
 
-  default = true
+  default = false
 }
 
 variable "edit_username_allowed" {
@@ -519,7 +519,6 @@ variable "security_defenses" {
       wait_increment_seconds           = optional(number)
     }), {})
   })
-
   description = <<-EOM
   The security_defenses argument can be used to configure the realm's security
   defenses via the `headers` and `brute_force_detection` sub-blocks. Object
@@ -588,17 +587,13 @@ variable "security_defenses" {
 
 }
 
-# Authentication Settings
-#
 variable "password_policy" {
   type        = string
   description = <<-EOM
   The password policy for users within the realm.
   EOM
 
-  default = <<-EOM
-  digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and length(14) and notUsername and notEmail and notContainsUsername()
-  EOM
+  default = "notUsername and notEmail and notContainsUsername and digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and length(14)"
 }
 
 variable "otp_policy" {
@@ -738,4 +733,62 @@ variable "web_authn_passwordless_policy" {
 
 
   default = {}
+}
+
+variable "client_scopes" {
+  type = map(object({
+    # Key is the name of the scope
+    description            = optional(string)
+    consent_screen_text    = optional(string)
+    include_in_token_scope = optional(bool)
+    gui_order              = optional(number)
+
+  }))
+  description = <<-EOM
+  Map of object, such that the key is the name of the scope displayed in the
+  GUI. Object support following arguments:
+  * `description`: Optional, string, the description of this client scope in the
+    GUI.
+  * `consent_screen_text`: Optional, string, when set, a consent screen will be
+    displayed to users authenticating to clients with this scope attached. The
+    consent screen will display the string value of this attribute.
+  * `include_in_token_scope`: Optional, bool, when true, the name of this client
+    scope will be added to the access token property 'scope' as well as to the
+    Token Introspection Endpoint response. When false, this scope will be
+    omitted from the token and from the Token Introspection Endpoint response.
+  * `gui_order`: Optional, number, specify order of the client scope in GUI
+    (such as in Consent page) as integer.
+  EOM
+
+  default = {}
+}
+
+variable "default_scopes" {
+  type        = list(string)
+  description = <<-EOM
+  An array of default client scope names that should be used when creating new
+  Keycloak clients.
+  EOM
+
+
+  default = []
+}
+
+variable "optional_scopes" {
+  type        = list(string)
+  description = <<-EOM
+  An array of optional client scope names that should be used when creating new
+  Keycloak clients.
+  EOM
+
+  default = []
+}
+
+variable "default_roles" {
+  type        = list(string)
+  description = <<-EOM
+  List of roles assigned to new users by default.
+  EOM
+
+  default = []
 }

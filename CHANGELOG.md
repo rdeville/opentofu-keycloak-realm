@@ -1,6 +1,17 @@
 <!-- markdownlint-disable-file -->
 # CHANGELOG
 
+## v0.3.0 (2026-02-22)
+
+### ✨ Minor
+
+  * ✨ Add support for realm roles (!7) by Romain Deville ([`ea837a4`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/ea837a44566914ee0789dff186c44ba961f3a421))
+  * ✨ Add support for realm roles by Romain Deville ([`4b824b5`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/4b824b5f3b3454edf5b9fa51d95f93a951d8c785)) 🔏
+
+### 🔊 Others
+
+  * 📝 Update README with tf-docs and new examples by Romain Deville ([`c175ff0`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/c175ff01354a036e2f9155ecf65341ee3e7057ee)) 🔏
+
 ## v0.2.0 (2026-02-17)
 
 ### ✨ Minor

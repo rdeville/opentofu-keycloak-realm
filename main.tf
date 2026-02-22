@@ -174,3 +174,15 @@ resource "keycloak_default_roles" "this" {
 
   default_roles = var.default_roles
 }
+
+# Setup default roles for the realm
+resource "keycloak_role" "this" {
+  for_each = var.roles
+  realm_id = keycloak_realm.this.id
+
+  name        = each.key
+  description = each.value.description
+  attributes  = each.value.attributes
+
+  import = each.value.import
+}

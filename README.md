@@ -146,6 +146,36 @@ module "realm_with_default_roles" {
 }
 ```
 
+### Deploy realm roles
+
+```hcl
+module "realm_with_roles" {
+  source = "git::https://framagit.org/rdeville-public/opentofu/keycloak-realm.git"
+
+  realm = "my-realm"
+
+  smtp_server = {
+    from = "contact@domain.tld"
+    host = "smtp.domain.tld"
+  }
+
+  roles = {
+    "custom-role" = {
+      description = "Custom role for specific users"
+      attributes = {
+        "department" = "IT"
+      }
+      import = false
+    },
+    "admin-role" = {
+      description = "Administrator role with full access"
+      attributes = {}
+      import = true
+    }
+  }
+}
+```
+
 <!-- BEGIN TF-DOCS -->
 ## ⚙️ Module Content
 
@@ -179,6 +209,8 @@ module "realm_with_default_roles" {
   > Setup default client scopes for the realm
 * [resource.keycloak_realm_optional_client_scopes.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm_optional_client_scopes)
   > Setup optional client scopes for the realm
+* [resource.keycloak_role.this](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/role)
+  > Setup default roles for the realm
 
 <!-- markdownlint-capture -->
 ### Inputs
@@ -260,6 +292,7 @@ string
 * [default_scopes](#default_scopes)
 * [optional_scopes](#optional_scopes)
 * [default_roles](#default_roles)
+* [roles](#roles)
 
 
 ##### `enabled`
@@ -1836,6 +1869,45 @@ List of roles assigned to new users by default.
 
   ```hcl
   []
+  ```
+
+  </div>
+</details>
+
+##### `roles`
+
+Map of object, such that the key is the name of the realm role displayed in
+the GUI. Object support following arguments:
+* `description`: Optional, string, the description of this realm role in the
+  GUI.
+* `attributes`: Optional, map of string, a map of custom attributes to add to
+  this realm role.
+* `import`: Optional, bool, when true, this role will be imported to the realm
+  if it already exists. When false, Terraform will attempt to create this
+  role, and will throw an error if a role with the same name already exists
+  in the realm.
+
+<details style="width: 100%;display: inline-block">
+  <summary>Type & Default</summary>
+  <div style="height: 1em"></div>
+  <div style="width:64%; float:left;">
+  <p style="border-bottom: 1px solid #333333;">Type</p>
+
+  ```hcl
+  map(object({
+    # Key is the name of the role
+    description = optional(string)
+    attributes  = optional(map(string))
+    import      = optional(bool)
+  }))
+  ```
+
+  </div>
+  <div style="width:34%;float:right;">
+  <p style="border-bottom: 1px solid #333333;">Default</p>
+
+  ```hcl
+  {}
   ```
 
   </div>

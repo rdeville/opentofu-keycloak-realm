@@ -792,3 +792,27 @@ variable "default_roles" {
 
   default = []
 }
+
+variable "roles" {
+  type = map(object({
+    # Key is the name of the role
+    description = optional(string)
+    attributes  = optional(map(string))
+    import      = optional(bool)
+  }))
+  description = <<-EOM
+  Map of object, such that the key is the name of the realm role displayed in
+  the GUI. Object support following arguments:
+  * `description`: Optional, string, the description of this realm role in the
+    GUI.
+  * `attributes`: Optional, map of string, a map of custom attributes to add to
+    this realm role.
+  * `import`: Optional, bool, when true, this role will be imported to the realm
+    if it already exists. When false, Terraform will attempt to create this
+    role, and will throw an error if a role with the same name already exists
+    in the realm.
+  EOM
+
+  default = {}
+
+}

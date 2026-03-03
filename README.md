@@ -1920,6 +1920,8 @@ the GUI. Object support following arguments:
   ID of the deployed realm
 * `client_scopes`:
   ID of the deployed realm
+* `roles`:
+  Roles of the deployed realm
 
 </details>
 

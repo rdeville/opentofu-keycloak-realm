@@ -1,6 +1,17 @@
 <!-- markdownlint-disable-file -->
 # CHANGELOG
 
+## v0.3.1 (2026-03-03)
+
+### 🩹 Patch
+
+  * ⚡️ Make default_roles not nullable and add roles output (!8) by Romain Deville ([`b9f52b4`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/b9f52b439840d497a29d3db8d5fb9a5cb8d07c99))
+  * ⚡️ Make default_roles not nullable and add roles output by Romain Deville ([`9a34ae4`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/9a34ae4a9edbe6a2e7de095e54a8763165a13ae1)) 🔏
+
+### 🔊 Others
+
+  * 📝 Update README with tf-docs by Romain Deville ([`eb54e41`](https://framagit.org/rdeville-public/opentofu/keycloak-realm/-/commit/eb54e412f468caa7be3f71954cc33b9e88b635c5)) 🔏
+
 ## v0.3.0 (2026-02-22)
 
 ### ✨ Minor

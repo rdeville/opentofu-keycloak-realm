@@ -790,7 +790,8 @@ variable "default_roles" {
   List of roles assigned to new users by default.
   EOM
 
-  default = []
+  nullable = false
+  default  = []
 }
 
 variable "roles" {
